@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+
+  "name": "NeBana",
+  "description": "If you like copying and pasting from the Intranet to Kibana this isn't for you",
+  "version": "1.0",
+  "permissions": [
+    "storage"
+  ],
+
+  "browser_action": {
+    "default_icon": "play.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["jquery-3.1.1.min.js", "background.js"],
+    "persistent": true
+  },
+  "icons": {
+    "64" : "play.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://www5.cj.com/intranet/getadvertiserdetail.do?cid=*"],
+      "js": ["jquery-3.1.1.min.js", "myScripts.js"]
+    },
+    {
+      "matches": ["https://jira.cnvrmedia.net/browse/*"],
+      "js": ["jquery-3.1.1.min.js", "jira.js"]
+    }
+  ]
+}
