@@ -212,8 +212,22 @@
         </tbody>
       </table>
     </div>
-  
-    <img src="http://pangea.dotomi.com/core/analytics/[site_id]/event" style="border:0;" alt="" />
+    <!-- Piwik -->
+      <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//ai.dotomi.com/analytics/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId', 68]);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      </script>
+      <noscript><p><img src="//ai.dotomi.com/analytics/piwik.php?idsite=68" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+    
   </body>
 </html>
 
