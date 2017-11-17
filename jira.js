@@ -2,20 +2,47 @@ $(document).ready (function() {
 	var url = window.location;
 	var param = url.pathname;
 	var ticketNumber = param.replace("/browse/","");
-	var ticketsURL = "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list";
-	var companyArray = [];	
-		$.ajax({
-		    url: ticketsURL,
-		    dataType: 'json',
-		    success: function (data) {
-		      $.each(data, function (i, companyArray) {         
-		          var advertiser_name = companyArray.advertiser_name;
-		          var cid = companyArray.advertiser_id;
-		          var eid = companyArray.enterprise_id;
-		          var ticketSelect = advertiser_name + ' (CID: ' + cid + ')'; 
-		          console.log(advertiser_name);
-		        })
-		    }
-		});
-
+	getCID(ticketNumber);
 });
+
+function getCID (num1) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "https://preview-pangea.dotomi.com/api/v1/cj-qa/tickets", true);
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState == 4) {
+	    var data1 = JSON.parse(xhr.responseText);
+	    
+	  	// var ticketNumber = "OPS-117181";
+	  	var index1 = data1.findIndex(function(item, i){
+	  		return item.ticket_number === num1;
+	  	});
+	  	var cid = parseInt(data1[index1].cid);
+
+		getEnterpriseID(cid);
+	  }
+	}
+	xhr.send();
+};
+
+function getEnterpriseID (num2) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list", true);
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState == 4) {
+	    var data2 = JSON.parse(xhr.responseText);
+	    var index2 = data2.findIndex(function(item, i){
+	    	// console.log(item);
+	    	// console.log(i);
+	    	return item.advertiser_id === num2;
+	    });
+	    // console.log(data2[840].advertiser_id)
+	    var enterpriseID = data2[index2].enterprise_id;
+	    // var enterprise_id = (data[index].enterprise_id);
+	    // console.log(enterprise_id);
+	    chrome.storage.sync.set({
+			"enterpriseID": enterpriseID
+		});
+	  }
+	}
+	xhr.send();
+};
