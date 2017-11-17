@@ -2,7 +2,7 @@ $(document).ready (function() {
 	var url = window.location;
 	var param = url.pathname;
 	var ticketNumber = param.replace("/browse/","");
-	var ticketsURL = "http://preview-pangea.dotomi.com/api/v1/affiliate/company-list";
+	var ticketsURL = "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list";
 	var companyArray = [];	
 		$.ajax({
 		    url: ticketsURL,
@@ -18,17 +18,4 @@ $(document).ready (function() {
 		    }
 		});
 
-	
-		// $.ajax({
-  //   		url: ticketsURL,
-  //   		dataType: 'json',
-  //   		success: function (data) {
-  //     			$.each(data, function (i, companyArray) {         
-		// 			var advertiser_name = companyArray.advertiser_name;
-		// 			var cid = companyArray.advertiser_id;
-		// 			var eid = companyArray.enterprise_id;
-  //  					}
-		// 		})
-		// 	}
-		// });
 });

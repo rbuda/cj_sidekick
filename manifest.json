@@ -3,7 +3,7 @@
 
   "name": "NeBana",
   "description": "If you like copying and pasting from the Intranet to Kibana this isn't for you",
-  "version": "1.0",
+  "version": "1.0.1",
   "permissions": [
     "storage"
   ],
