@@ -31,14 +31,9 @@ function getEnterpriseID (num2) {
 	  if (xhr.readyState == 4) {
 	    var data2 = JSON.parse(xhr.responseText);
 	    var index2 = data2.findIndex(function(item, i){
-	    	// console.log(item);
-	    	// console.log(i);
 	    	return item.advertiser_id === num2;
 	    });
-	    // console.log(data2[840].advertiser_id)
 	    var enterpriseID = data2[index2].enterprise_id;
-	    // var enterprise_id = (data[index].enterprise_id);
-	    // console.log(enterprise_id);
 	    chrome.storage.sync.set({
 			"enterpriseID": enterpriseID
 		});

@@ -3,7 +3,7 @@
 
   "name": "NeBana",
   "description": "If you like copying and pasting from the Intranet to Kibana this isn't for you",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "permissions": [
     "storage",
     "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list",
@@ -29,6 +29,10 @@
     {
       "matches": ["https://jira.cnvrmedia.net/browse/*"],
       "js": ["jquery-3.1.1.min.js", "jira.js"]
+    },
+    {
+      "matches": ["https://cjaffiliate.my.salesforce.com/console"],
+      "js": ["jquery-3.1.1.min.js", "salesforce.js"]
     }
   ]
 }
