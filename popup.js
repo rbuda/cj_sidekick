@@ -1,5 +1,6 @@
 var k4arr = [];
 window.onload = function() {
+  
   document.getElementById("save").onclick = function() {
     var oid = document.getElementById("saveLine").value;
     var cid = document.getElementById("saveLine2").value;
@@ -13,15 +14,6 @@ window.onload = function() {
         document.getElementById("saveLine2").value="";
     });
   };
-
-  // var box = document.getElementById("ischeckedyorn");
-  // box.onchange = function() {
-  //   if (box.checked) {
-  //     alert("checked");
-  //   } else {
-  //     alert("not checked")
-  //   };
-  // };
 
   chrome.storage.sync.get("oid", function(data) {
     document.getElementById("orderIDDisplay").append(data.oid);

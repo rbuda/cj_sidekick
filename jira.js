@@ -8,19 +8,21 @@ $(document).ready (function() {
 function getCID (num1) {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://preview-pangea.dotomi.com/api/v1/cj-qa/tickets", true);
-	xhr.onreadystatechange = function() {
-	  if (xhr.readyState == 4) {
-	    var data1 = JSON.parse(xhr.responseText);
-	    
-	  	// var ticketNumber = "OPS-117181";
-	  	var index1 = data1.findIndex(function(item, i){
-	  		return item.ticket_number === num1;
-	  	});
-	  	var cid = parseInt(data1[index1].cid);
-
-		getEnterpriseID(cid);
-	  }
-	}
+	xhr.onreadystatechange = function() { 
+		if (xhr.readyState == 4) {
+			if (xhr.responseURL.includes("login")) {
+				alert("Please login to preview-pangea for NeBana to get an Enterprise ID from JIRA");
+				window.open("http://preview-pangea.dotomi.com/login");
+			};
+			var data1 = JSON.parse(xhr.responseText);
+			var index1 = data1.findIndex(function(item, i){
+				return item.ticket_number === num1;
+			});
+			var cid = parseInt(data1[index1].cid);
+			console.log(cid);
+			getEnterpriseID(cid);
+		}
+	};
 	xhr.send();
 };
 
@@ -28,16 +30,19 @@ function getEnterpriseID (num2) {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list", true);
 	xhr.onreadystatechange = function() {
-	  if (xhr.readyState == 4) {
-	    var data2 = JSON.parse(xhr.responseText);
-	    var index2 = data2.findIndex(function(item, i){
-	    	return item.advertiser_id === num2;
-	    });
-	    var enterpriseID = data2[index2].enterprise_id;
-	    chrome.storage.sync.set({
+		if (xhr.readyState == 4) {
+		var data2 = JSON.parse(xhr.responseText);
+		var index2 = data2.findIndex(function(item, i){
+			return item.advertiser_id === num2;
+		});
+		var enterpriseID = data2[index2].enterprise_id;
+		var advName = data2[index2].advertiser_name;
+		console.log(advName);
+		console.log(enterpriseID);
+		chrome.storage.sync.set({
 			"enterpriseID": enterpriseID
 		});
 	  }
-	}
+	};
 	xhr.send();
 };
