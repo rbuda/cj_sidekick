@@ -25,9 +25,6 @@ window.onload = function() {
   chrome.storage.sync.get("enterpriseID", function(data) {
     document.getElementById("saveLine2").value=data.enterpriseID;
   });
-  // chrome.storage.sync.get("companyName", function(data) {
-  //   document.getElementById("companyNameDisplay").append(data.companyName);
-  // });
 
   document.getElementById("launch").onclick = function() {
       chrome.storage.sync.get("oid", function(data) {
