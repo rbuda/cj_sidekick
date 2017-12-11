@@ -20,10 +20,14 @@ window.onload = function() {
   });
   chrome.storage.sync.get("cid", function(data) {
     document.getElementById("entIDDisplay").append(data.cid);
+    getCompanyName(data.cid);
   });
   chrome.storage.sync.get("enterpriseID", function(data) {
     document.getElementById("saveLine2").value=data.enterpriseID;
   });
+  // chrome.storage.sync.get("companyName", function(data) {
+  //   document.getElementById("companyNameDisplay").append(data.companyName);
+  // });
 
   document.getElementById("launch").onclick = function() {
       chrome.storage.sync.get("oid", function(data) {
@@ -49,6 +53,27 @@ window.onload = function() {
       buildK4Arr("time", value);
   };
 }
+
+function getCompanyName (num) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list", true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+    var data = JSON.parse(xhr.responseText);
+    var index = data.findIndex(function(item, i){
+      return item.enterprise_id === parseInt(num);
+    });
+    var enterpriseID = data[index].enterprise_id;
+    var advName = data[index].advertiser_name;
+    displayCompanyName(advName);
+    }
+  };
+  xhr.send();
+};
+
+function displayCompanyName (advName) {
+  document.getElementById("companyNameDisplay").append(advName);
+};
 
 function buildK4Arr(key, value) {
   k4arr[key] = value;

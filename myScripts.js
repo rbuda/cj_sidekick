@@ -11,8 +11,10 @@ $(document).ready (function() {
 	var x = str2.indexOf("<b>") + 3;
 	var y = str2.indexOf("</b>")
 	var companyName = str2.slice(x,y).trim();
-	
 	chrome.storage.sync.set({
 		"enterpriseID": enterpriseID
 	});
 });
+
+
+

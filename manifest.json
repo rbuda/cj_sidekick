@@ -3,7 +3,7 @@
 
   "name": "NeBana",
   "description": "If you like copying and pasting from the Intranet to Kibana this isn't for you",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "permissions": [
     "storage",
     "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list",
