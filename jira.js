@@ -1,3 +1,5 @@
+var enterpriseID;
+
 $(document).ready (function() {
 	var url = window.location;
 	var param = url.pathname;
@@ -40,7 +42,7 @@ function getEnterpriseID (num2) {
 		console.log(advName);
 		console.log(enterpriseID);
 		chrome.storage.sync.set({
-			"enterpriseID": enterpriseID
+			"cid": enterpriseID
 		});
 	  }
 	};

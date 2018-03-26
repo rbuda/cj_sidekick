@@ -30,9 +30,5 @@
       "matches": ["https://jira.cnvrmedia.net/browse/*"],
       "js": ["jquery-3.1.1.min.js", "jira.js"]
     }
-    // {
-    //   "matches": ["https://cjaffiliate.my.salesforce.com/console"],
-    //   "js": ["jquery-3.1.1.min.js", "salesforce.js"]
-    // }
   ]
 }

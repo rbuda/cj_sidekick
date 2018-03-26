@@ -12,7 +12,7 @@ $(document).ready (function() {
 	var y = str2.indexOf("</b>")
 	var companyName = str2.slice(x,y).trim();
 	chrome.storage.sync.set({
-		"enterpriseID": enterpriseID
+		"cid": enterpriseID
 	});
 });
 

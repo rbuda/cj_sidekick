@@ -22,9 +22,9 @@ window.onload = function() {
     document.getElementById("entIDDisplay").append(data.cid);
     getCompanyName(data.cid);
   });
-  chrome.storage.sync.get("enterpriseID", function(data) {
-    document.getElementById("saveLine2").value=data.enterpriseID;
-  });
+  // chrome.storage.sync.get("enterpriseID", function(data) {
+  //   document.getElementById("saveLine2").value=data.enterpriseID;
+  // });
 
   document.getElementById("launch").onclick = function() {
       chrome.storage.sync.get("oid", function(data) {
