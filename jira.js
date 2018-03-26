@@ -21,7 +21,6 @@ function getCID (num1) {
 				return item.ticket_number === num1;
 			});
 			var cid = parseInt(data1[index1].cid);
-			console.log(cid);
 			getEnterpriseID(cid);
 		}
 	};
@@ -39,8 +38,6 @@ function getEnterpriseID (num2) {
 		});
 		var enterpriseID = data2[index2].enterprise_id;
 		var advName = data2[index2].advertiser_name;
-		console.log(advName);
-		console.log(enterpriseID);
 		chrome.storage.sync.set({
 			"cid": enterpriseID
 		});
