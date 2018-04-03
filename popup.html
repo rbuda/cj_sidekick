@@ -30,8 +30,11 @@
         list-style-type: none;
         text-align: center;
         border-radius: 25px;
-        background-image: url("white3.jpg");
+        background-color: ;
+        background-image: url("hillshade.jpg");
         background-size: cover;
+        border-color: #4dc794;
+        border-style: groove;
         width: 280px;
         height: 205px;
         margin: auto;
@@ -51,15 +54,15 @@
       #orderIDDisplay {
         padding-top: 10px;
         padding-bottom: 5px;
-        color: #FF0000;
+        color: black;
       }
       #entIDDisplay {
         padding-bottom: 5px;
         padding-top: 10px;
-        color: #FF0000;
+        color: black;
       }
       #companyNameDisplay {
-        color: #FF0000;
+        color: black;
         padding-bottom: 5px;
       }
       #saveLine {
@@ -73,7 +76,7 @@
       #timePeriodText {
         padding-bottom: 5px;
         padding-top: 10px;
-        color: #FF0000;
+        color: black;
       }
       #timePeriodBox {
         margin: 0 auto;
@@ -121,10 +124,9 @@
       body {
         min-width: 300px;
         min-height: 340px;
-        background-color: white;
         font-size: 100%;
         font-family: ".tradegothiclt-bold", sans-serif;
-        background-color: #f8f8f8;
+        background-image: url("hillshade-dc.jpg");
       }
 
     </style>
@@ -144,7 +146,7 @@
 
     <div id="insidearea">
       <div id="form">
-        <form>
+        <form id>
           <li id="orderIDDisplay">Order ID: </li> 
             <input type="text" id="saveLine" value=""/>
             <input type="submit" id="save" hidden="true">
