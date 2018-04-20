@@ -27,7 +27,6 @@ function getCID (num1) {
 	xhr.send();
 };
 
-		alert(enterpriseID); 
 function getEnterpriseID (num2) {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list", true);

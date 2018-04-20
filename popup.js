@@ -1,39 +1,55 @@
 var k4arr = [];
 window.onload = function() {
 
-  // ON ENTER:
-    // Store Vals & LAUNCH K4
-
-  // $(document).keypress(function(e){
-  //   // if ($("#saveLine" && "#saveLine2").on("blur")) {
-  //   //   alert("no worries");
-  //   // } else 
-  //   if (e.which == 13) {
-  //     chrome.storage.sync.get("oid", function(data) {
-  //       buildK4Arr("orderID", data.oid)
-  //     });
-  //     chrome.storage.sync.get("cid", function(data) {
-  //       buildK4Arr("enterpriseID", data.cid)
-  //     });  
-  //     var e = document.getElementById("timePeriodBox");
-  //     var value = e.options[e.selectedIndex].value;
-  //     buildK4Arr("time", value);
-  //   }
-  // });
-
-  document.getElementById("save").onclick = function() {
+  $(document).keypress(function(e){
     var oid = document.getElementById("saveLine").value;
     var cid = document.getElementById("saveLine2").value;
-    
+    if (e.which == 13) {
+      if (oid == "" && cid == ""){
+        chrome.storage.sync.get("oid", function(data) {
+          buildK4Arr("orderID", data.oid)
+        });
+        chrome.storage.sync.get("cid", function(data) {
+          buildK4Arr("enterpriseID", data.cid)
+        });  
+        var e = document.getElementById("timePeriodBox");
+        var value = e.options[e.selectedIndex].value;
+        buildK4Arr("time", value);
+      } else {
+        storeValues(oid, cid);
+        chrome.storage.sync.get("oid", function(data) {
+          buildK4Arr("orderID", data.oid)
+        });
+        chrome.storage.sync.get("cid", function(data) {
+          buildK4Arr("enterpriseID", data.cid)
+        });  
+        var e = document.getElementById("timePeriodBox");
+        var value = e.options[e.selectedIndex].value;
+        buildK4Arr("time", value);
+      }
+    }
+  });
+
+  function storeValues(oid, cid){
     chrome.storage.sync.set({
       "oid": oid,
       "cid": cid,
-    },
-      function() {
-        document.getElementById("saveLine").value="";
-        document.getElementById("saveLine2").value="";
     });
   };
+
+  // document.getElementById("save").onclick = function() {
+  //   var oid = document.getElementById("saveLine").value;
+  //   var cid = document.getElementById("saveLine2").value;
+    
+  //   chrome.storage.sync.set({
+  //     "oid": oid,
+  //     "cid": cid,
+  //   },
+  //     function() {
+  //       document.getElementById("saveLine").value="";
+  //       document.getElementById("saveLine2").value="";
+  //   });
+  // };
 
   chrome.storage.sync.get("oid", function(data) {
     document.getElementById("orderIDDisplay").append(data.oid);
@@ -103,11 +119,11 @@ function buildK4Arr(key, value) {
 };
 
 function openKibana(arr) {
-  if (arr != null && arr.enterpriseID.length > 0 && arr.orderID > 0) {
+  if (arr != null && arr.enterpriseID != (null || 0) > 0 && arr.orderID.length != (0)) {
     window.open("http://kibana.int.cj.com/#/dashboard/CIE_Dashboard?_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-"+arr.time+",mode:quick,to:now))&_a=(filters:!((meta:(disabled:!f,index:%5Bactivity-%5DYYYY-MM-DD,key:coreview.enterprise_id,negate:!f,value:'"+arr.enterpriseID+"'),query:(match:(coreview.enterprise_id:(query:'"+arr.enterpriseID+"',type:phrase)))),(meta:(disabled:!f,index:%5Bactivity-%5DYYYY-MM-DD,key:coreview.query.oid,negate:!f,value:'"+arr.orderID+"'),query:(match:(coreview.query.oid:(query:'"+arr.orderID+"',type:phrase))))),panels:!((col:1,columns:!(coreview.event_time_utc,coreview.last_click_time,coreview.query.oid,coreview.request_url,coreview.query_string,coreview.referring_url,coreview.client_ip_address),id:dkcieSrch,row:13,size_x:12,size_y:4,sort:!(coreview.event_time_utc,desc),type:search),(col:8,id:VIEWS__dkcie,row:1,size_x:5,size_y:4,type:visualization),(col:8,id:VIEWS_IN_AP__dkcie,row:5,size_x:5,size_y:3,type:visualization),(col:1,id:HITS__dkcie,row:1,size_x:4,size_y:2,type:visualization),(col:1,id:DK4_01-apbad_error_code,row:3,size_x:4,size_y:2,type:visualization),(col:8,id:Device_is_Mobile_Desktop_Other___dkc,row:8,size_x:5,size_y:3,type:visualization),(col:1,id:Top-10-Amount-Values,row:5,size_x:3,size_y:4,type:visualization),(col:6,id:Top-10-Item1-Values,row:5,size_x:2,size_y:4,type:visualization),(col:4,id:Top-10-OID-Values,row:5,size_x:2,size_y:4,type:visualization),(col:4,id:Top-10-Action-Values,row:9,size_x:2,size_y:4,type:visualization),(col:1,id:Top-10-Coupon-Values,row:9,size_x:3,size_y:4,type:visualization),(col:5,id:'Top-10-Enterprise-ID!'s',row:1,size_x:3,size_y:4,type:visualization),(col:6,id:Top-10-AMT1-Values,row:9,size_x:2,size_y:4,type:visualization),(col:8,id:'Top-10-Referring-URL!'s',row:11,size_x:3,size_y:2,type:visualization),(col:11,id:Top-10-Discount-Values,row:11,size_x:2,size_y:2,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:CIE_Dashboard)");
-  } else if (arr != null && arr.enterpriseID > 0) {
+  } else if (arr != null && arr.enterpriseID != (null || 0)) {
     window.open("http://kibana.int.cj.com/#/dashboard/CIE_Dashboard?_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-"+arr.time+",mode:quick,to:now))&_a=(filters:!((meta:(disabled:!f,index:%5Bactivity-%5DYYYY-MM-DD,key:coreview.enterprise_id,negate:!f,value:'"+arr.enterpriseID+"'),query:(match:(coreview.enterprise_id:(query:'"+arr.enterpriseID+"',type:phrase))))),panels:!((col:1,columns:!(coreview.event_time_utc,coreview.last_click_time,coreview.query.oid,coreview.request_url,coreview.query_string,coreview.referring_url,coreview.client_ip_address),id:dkcieSrch,row:13,size_x:12,size_y:4,sort:!(coreview.event_time_utc,desc),type:search),(col:8,id:VIEWS__dkcie,row:1,size_x:5,size_y:4,type:visualization),(col:8,id:VIEWS_IN_AP__dkcie,row:5,size_x:5,size_y:3,type:visualization),(col:1,id:HITS__dkcie,row:1,size_x:4,size_y:2,type:visualization),(col:1,id:DK4_01-apbad_error_code,row:3,size_x:4,size_y:2,type:visualization),(col:8,id:Device_is_Mobile_Desktop_Other___dkc,row:8,size_x:5,size_y:3,type:visualization),(col:1,id:Top-10-Amount-Values,row:5,size_x:3,size_y:4,type:visualization),(col:6,id:Top-10-Item1-Values,row:5,size_x:2,size_y:4,type:visualization),(col:4,id:Top-10-OID-Values,row:5,size_x:2,size_y:4,type:visualization),(col:4,id:Top-10-Action-Values,row:9,size_x:2,size_y:4,type:visualization),(col:1,id:Top-10-Coupon-Values,row:9,size_x:3,size_y:4,type:visualization),(col:5,id:'Top-10-Enterprise-ID!'s',row:1,size_x:3,size_y:4,type:visualization),(col:6,id:Top-10-AMT1-Values,row:9,size_x:2,size_y:4,type:visualization),(col:8,id:'Top-10-Referring-URL!'s',row:11,size_x:3,size_y:2,type:visualization),(col:11,id:Top-10-Discount-Values,row:11,size_x:2,size_y:2,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:CIE_Dashboard)");
-  } else if (arr != null & arr.orderID > 0) {
+  } else if (arr != null && arr.orderID != (null || 0)) {
     window.open("http://kibana.int.cj.com/#/dashboard/CIE_Dashboard?_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-"+arr.time+",mode:quick,to:now))&_a=(filters:!((meta:(disabled:!f,index:%5Bactivity-%5DYYYY-MM-DD,key:coreview.query.oid,negate:!f,value:'"+arr.orderID+"'),query:(match:(coreview.query.oid:(query:'"+arr.orderID+"',type:phrase))))),panels:!((col:1,columns:!(coreview.event_time_utc,coreview.last_click_time,coreview.query.oid,coreview.request_url,coreview.query_string,coreview.referring_url,coreview.client_ip_address),id:dkcieSrch,row:13,size_x:12,size_y:4,sort:!(coreview.event_time_utc,desc),type:search),(col:8,id:VIEWS__dkcie,row:1,size_x:5,size_y:4,type:visualization),(col:8,id:VIEWS_IN_AP__dkcie,row:5,size_x:5,size_y:3,type:visualization),(col:1,id:HITS__dkcie,row:1,size_x:4,size_y:2,type:visualization),(col:1,id:DK4_01-apbad_error_code,row:3,size_x:4,size_y:2,type:visualization),(col:8,id:Device_is_Mobile_Desktop_Other___dkc,row:8,size_x:5,size_y:3,type:visualization),(col:1,id:Top-10-Amount-Values,row:5,size_x:3,size_y:4,type:visualization),(col:6,id:Top-10-Item1-Values,row:5,size_x:2,size_y:4,type:visualization),(col:4,id:Top-10-OID-Values,row:5,size_x:2,size_y:4,type:visualization),(col:4,id:Top-10-Action-Values,row:9,size_x:2,size_y:4,type:visualization),(col:1,id:Top-10-Coupon-Values,row:9,size_x:3,size_y:4,type:visualization),(col:5,id:'Top-10-Enterprise-ID!'s',row:1,size_x:3,size_y:4,type:visualization),(col:6,id:Top-10-AMT1-Values,row:9,size_x:2,size_y:4,type:visualization),(col:8,id:'Top-10-Referring-URL!'s',row:11,size_x:3,size_y:2,type:visualization),(col:11,id:Top-10-Discount-Values,row:11,size_x:2,size_y:2,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:CIE_Dashboard)");
   } else {
     alert("Please fill in one or both of the fields.");
