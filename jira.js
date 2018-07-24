@@ -10,6 +10,7 @@ $(document).ready (function() {
 function getCID (num1) {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://preview-pangea.dotomi.com/api/v1/cj-qa/tickets", true);
+	xhr.withCredentials = true;
 	xhr.onreadystatechange = function() { 
 		if (xhr.readyState == 4) {
 			if (xhr.responseURL.includes("login")) {
@@ -30,6 +31,7 @@ function getCID (num1) {
 function getEnterpriseID (num2) {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list", true);
+	xhr.withCredentials = true;
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 		var data2 = JSON.parse(xhr.responseText);
