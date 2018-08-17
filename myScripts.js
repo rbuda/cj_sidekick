@@ -5,7 +5,7 @@ $(document).ready (function() {
 	var str = page[0].innerHTML
 	var htmlText = str.substring(str.indexOf("id:") + 3);
 	var enterpriseID = htmlText.replace(/\s/g, "");
-	
+
 	var page2 = document.getElementsByClassName("body");
 	var str2 = page2[15].innerHTML;
 	var x = str2.indexOf("<b>") + 3;
@@ -16,6 +16,3 @@ $(document).ready (function() {
 		"oid": "",
 	});
 });
-
-
-

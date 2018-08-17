@@ -3,7 +3,7 @@
 
   "name": "NeBana",
   "description": "If you like copying and pasting from the Intranet to Kibana this isn't for you",
-  "version": "1.3.2",
+  "version": "1.3.4",
   "permissions": [
     "storage",
     "https://preview-pangea.dotomi.com/api/v1/affiliate/company-list",
@@ -23,7 +23,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://www5.cj.com/intranet/getadvertiserdetail.do?cid=*"],
+      "matches": ["https://www5.cj.com/intranet/getadvertiserdetail.do?cid=*"],
       "js": ["jquery-3.1.1.min.js", "myScripts.js"]
     },
     {
